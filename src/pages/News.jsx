@@ -1,8 +1,14 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 function News() {
   return (
-    <div>News</div>
+    <div>
+      <Navbar />
+        <div className='container'>
+          <h1>Новости</h1>
+        </div>
+      </div>
   )
 }
 

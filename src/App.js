@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './pages/Login';
 import News from './pages/News';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
     const [isAuth, setIsAuth] = React.useState('false');
@@ -14,7 +15,7 @@ function App() {
         setIsAuth(state);
     };
 
-    // console.log(setStateFunc);
+    // console.log(isAuth);
 
     return (
         <BrowserRouter>
@@ -33,7 +34,13 @@ function App() {
                     <Route path='/news' element={<News />} />
                     <Route
                         path='/profile'
-                        element={isAuth ? <Profile /> : <Login />}
+                        element={
+                            isAuth ? (
+                                <Profile />
+                            ) : (
+                                <Navigate replace to='/login' />
+                            )
+                        }
                     />
                 </Routes>
             </div>

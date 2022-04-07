@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 function Login({isAuth, setStateFunc}) {
 
@@ -10,9 +11,9 @@ function Login({isAuth, setStateFunc}) {
     const [helper, setHelper] = React.useState(false)
     
 
-    // React.useEffect(() => {
-    //     localStorage.setItem("formData", JSON.stringify(formData))
-    // }, [formData])
+    React.useEffect(() => {
+        localStorage.setItem("isAuth", isAuth)
+    }, [isAuth])
     
     function handleChange(event){
         const {name, value} = event.target
@@ -41,8 +42,10 @@ function Login({isAuth, setStateFunc}) {
    
 
   return (
+      <div>
+          <Navbar/>
     <div className='form-container'>
-        <h1>Sign in</h1>
+        <h1>Войти</h1>
         <form className="form" onSubmit={handleSubmit}>
                 <input 
                     type="text" 
@@ -59,14 +62,16 @@ function Login({isAuth, setStateFunc}) {
                     onChange={handleChange}
                     name="password"
                     value={formData.password}
+                    autoComplete="on"
                 />
-                {helper && <small className='form--helper'>*Enter correct username and password</small>}
+                {helper && <small className='form--helper'>*Имя пользователя или пароль введены не верно</small>}
                 <button 
                     className="form--submit"
                 >
                     Sign in
                 </button>
             </form>
+    </div>
     </div>
   )
 }
