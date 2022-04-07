@@ -1,14 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 
-function Login() {
+function Login({isAuth, setStateFunc}) {
 
     const [formData, setFormData] = React.useState({
         username: "",
         password: "",
     })
+
+    const [helper, setHelper] = React.useState(false)
     
-    // console.log(formData)
 
     // React.useEffect(() => {
     //     localStorage.setItem("formData", JSON.stringify(formData))
@@ -22,16 +22,23 @@ function Login() {
                 [name]: value}
         })
     }
+
+   
     
     function handleSubmit(event) {
         event.preventDefault()
-        if(formData.username === 'admin' && formData.password === '123') {
+        
+        if(formData.username === 'admin' && formData.password === '12345') {
+            setStateFunc(true)
+            window.location.replace('http://localhost:3000/profile');
             console.log("Successfully signed in")
         } else {
+            setHelper(true)
             console.log("Enter correct username and password")
             return
         }
     }
+   
 
   return (
     <div className='form-container'>
@@ -53,6 +60,7 @@ function Login() {
                     name="password"
                     value={formData.password}
                 />
+                {helper && <small className='form--helper'>*Enter correct username and password</small>}
                 <button 
                     className="form--submit"
                 >
